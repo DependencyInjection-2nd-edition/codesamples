@@ -1,0 +1,9 @@
+﻿@model Ploeh.Samples.Commerce.Web.Models.FeaturedProductsViewModel
+
+<h2>Featured Products</h2>
+<div>
+    @foreach (var product in this.Model.Products)
+    {
+        <div>@product.SummaryText</div>
+    }
+</div>

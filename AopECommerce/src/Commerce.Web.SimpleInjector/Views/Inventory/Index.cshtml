@@ -1,0 +1,29 @@
+﻿@model AdjustInventoryViewModel
+
+<h2>Inventory adjustment</h2>
+
+<form asp-controller="Inventory" asp-action="AdjustInventory" method="post">
+    <div>
+        <div asp-validation-summary="ModelOnly" style="color:red"></div>
+
+        <fieldset name="Product selection">
+            <legend>Select a product</legend>
+
+            <select asp-for="Command.ProductId" asp-items="Model.Products"></select>
+        </fieldset>
+
+        <fieldset name="Inventory adjustment">
+            <legend>Adjust inventory</legend>
+
+            <label asp-for="Command.Decrease"></label>
+            <select asp-for="Command.Decrease" asp-items="Model.DecreaseOptions"></select>
+
+            <br />
+            <label asp-for="Command.Quantity"></label>
+            <input asp-for="Command.Quantity" />
+            <span asp-validation-for="Command.Quantity" style="color:red"></span>
+        </fieldset>
+
+        <button type="submit">Update</button>
+    </div>
+</form>

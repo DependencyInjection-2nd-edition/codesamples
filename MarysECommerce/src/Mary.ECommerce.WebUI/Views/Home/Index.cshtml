@@ -1,0 +1,12 @@
+﻿@using Ploeh.Samples.Mary.ECommerce.SqlDataAccess
+<h2>Featured Products</h2>
+<div>
+@{
+    var products = (IEnumerable<Product>)this.ViewData["Products"];
+
+    foreach (var product in products)
+    {
+        <div>@product.Name (@product.UnitPrice.ToString("C"))</div>
+    }
+}
+</div>

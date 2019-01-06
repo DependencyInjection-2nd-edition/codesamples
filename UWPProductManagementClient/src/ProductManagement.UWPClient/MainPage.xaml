@@ -1,0 +1,90 @@
+﻿<Page
+    x:Class="Ploeh.Samples.ProductManagement.UWPClient.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uiCommands="using:Ploeh.Samples.ProductManagement.PresentationLogic.UICommands"
+    xmlns:converters="using:Ploeh.Samples.ProductManagement.UWPClient.Converters"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+            <converters:DecimalValueConverter x:Key="DecimalConverter"/>
+    </Page.Resources>
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock FontSize="26" FontWeight="Bold" Grid.Column="1" Grid.Row="0" >Products</TextBlock>
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="2" >
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0">
+                <TextBlock Margin="10" Text="Name" FontWeight="Bold" 
+                           Style="{StaticResource BaseTextBlockStyle}"  />
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1">
+                    <TextBlock Margin="10" Text="Unit price" FontWeight="Bold" 
+                           Style="{StaticResource BodyTextBlockStyle}" />
+            </StackPanel>
+                </Grid>
+        </StackPanel>
+        
+        <Line Grid.Row="3" Grid.Column="1" Stroke="Black" StrokeThickness="2" Stretch="Fill" X1="1" X2="100" Y1="1" Y2="1"
+              Margin="0,0,0,10"></Line>
+        
+        <GridView ItemsSource="{Binding Model, Mode=OneWay}" 
+            Grid.Row="4" Grid.Column="1"
+            uiCommands:ItemClickCommand.Command ="{Binding EditProductCommand, Mode=OneWay}"
+            IsItemClickEnabled="True">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0">
+                            <TextBlock Margin="10" Text="{Binding Name}" FontWeight="Bold" 
+                                   Style="{StaticResource BaseTextBlockStyle}"  />
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1">
+                            <TextBlock Margin="10" Text="{Binding UnitPrice, Converter={StaticResource DecimalConverter}}" 
+                                   Style="{StaticResource BodyTextBlockStyle}" />
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                </Style>
+            </GridView.ItemContainerStyle>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+
+        </GridView>
+        <CommandBar Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="0">
+            <AppBarToggleButton Icon="Add" Label="Add product" Command="{Binding AddProductCommand}" />
+        </CommandBar>
+    </Grid>
+</Page>

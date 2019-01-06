@@ -1,0 +1,24 @@
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[AuditEntries](
+	[Id] [uniqueidentifier] NOT NULL,
+	[UserId] [uniqueidentifier] NULL,
+	[TimeOfExecution] [datetime] NOT NULL,
+	[Operation] [nvarchar](max) NOT NULL,
+	[Data] [nvarchar](max) NOT NULL,
+	CONSTRAINT [PK_AuditEntries] PRIMARY KEY CLUSTERED ( [Id] ASC )
+	WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
