@@ -19,4 +19,18 @@ If you wish to use SQL Server instead, the applications require that their datab
 
 After setting up the database, you need to add the connection string to the `applicationsettings.json` files of the applications, and change the CommerceContext to use SQL Server instead of SQLite.
 
+## Contributions
+
+All code is is released as open source, and we do take pull requests. We've left blank some implementation code not central to the topic of dependency injection, or at least in a state that could be improved.
+
+There's also fewer unit tests than we'd like.
+
+You can help improve the code, but with one important limitation:
+
+**The code that appears in the book musn't be changed.**
+
+While an open source code base is a dynamic entity, the printed book can't be changed, and even the eBooks are unlikely to see drastic changes. We'll do our best to mark the parts of the code that mustn't be changed.
+
+For the rest of the code base, we take pull requests, but please follow [these tips for good pull requests](https://blog.ploeh.dk/2015/01/15/10-tips-for-better-pull-requests).
+
 (Last updated 2019.01.07 while finalizing the manuscript)
