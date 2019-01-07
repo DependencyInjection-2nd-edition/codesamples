@@ -31,6 +31,6 @@ You can help improve the code, but with one important limitation:
 
 While an open source code base is a dynamic entity, the printed book can't be changed, and even the eBooks are unlikely to see drastic changes. We'll do our best to mark the parts of the code that mustn't be changed.
 
-For the rest of the code base, we take pull requests, but please follow [these tips for good pull requests](http://blog.ploeh.dk/2015/01/15/10-tips-for-better-pull-requests).
+For the rest of the code base, we take pull requests, but please follow [these tips for good pull requests](https://blog.ploeh.dk/2015/01/15/10-tips-for-better-pull-requests).
 
 (Last updated 2019.01.07 while finalizing the manuscript)
