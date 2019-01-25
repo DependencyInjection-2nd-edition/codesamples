@@ -1,12 +1,13 @@
-﻿@using Ploeh.Samples.Mary.ECommerce.SqlDataAccess
+﻿@* ---- Code Listing 2.5 ---- *@
+@using Ploeh.Samples.Mary.ECommerce.SqlDataAccess
 <h2>Featured Products</h2>
 <div>
-@{
-    var products = (IEnumerable<Product>)this.ViewData["Products"];
+    @{
+        var products = (IEnumerable<Product>)this.ViewData["Products"];
 
-    foreach (var product in products)
-    {
-        <div>@product.Name (@product.UnitPrice.ToString("C"))</div>
+        foreach (var product in products)
+        {
+            <div>@product.Name (@product.UnitPrice.ToString("C"))</div>
+        }
     }
-}
 </div>

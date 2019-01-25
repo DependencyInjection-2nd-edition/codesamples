@@ -2,6 +2,7 @@
 
 namespace Ploeh.Samples.Greeter.Console
 {
+    // ---- Code Section 9.1.1 ----
     public class SimpleDecorator : IGreeter
     {
         private readonly IGreeter decoratee;

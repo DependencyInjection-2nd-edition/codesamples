@@ -5,6 +5,8 @@ namespace Ploeh.Samples.Commerce.Domain.Tests.Unit
 {
     public class ProductTests
     {
+        // Tests missing? Send us a pull request.
+
         [Fact]
         public void ProductContainsWellBehavedWritableProperties()
         {

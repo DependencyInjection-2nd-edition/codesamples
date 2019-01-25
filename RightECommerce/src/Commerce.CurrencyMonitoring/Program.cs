@@ -6,6 +6,7 @@ using Ploeh.Samples.Commerce.Domain;
 
 namespace Ploeh.Samples.Commerce.CurrencyMonitoring
 {
+    // ---- Start code Listing 8.14 ----
     public static class Program
     {
         private static Composer composer;
@@ -21,6 +22,7 @@ namespace Ploeh.Samples.Commerce.CurrencyMonitoring
             DisplayRates(money);
 
             var timer = new Timer(interval: 60000);
+
             timer.Elapsed += (s, e) => DisplayRates(money);
             timer.Start();
 
@@ -30,11 +32,14 @@ namespace Ploeh.Samples.Commerce.CurrencyMonitoring
 
         private static void DisplayRates(Money money)
         {
-            CurrencyRateDisplayer displayer = composer.CreateRateDisplayer();
+            CurrencyRateDisplayer displayer =
+                composer.CreateRateDisplayer();
 
             displayer.DisplayRatesFor(money);
         }
+        // ---- End code Listing 8.14 ----
 
+        // ---- Start code Listing 7.1 ----
         private static string LoadConnectionString()
         {
             var configuration = new ConfigurationBuilder()
@@ -42,7 +47,9 @@ namespace Ploeh.Samples.Commerce.CurrencyMonitoring
                 .AddJsonFile("appsettings.json", optional: false)
                 .Build();
 
-            return configuration.GetConnectionString("CommerceConnectionString");
+            return configuration.GetConnectionString(
+                "CommerceConnectionString");
         }
+        // ---- End code Listing 7.1 ----
     }
 }

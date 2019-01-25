@@ -13,10 +13,12 @@ namespace Ploeh.Samples.Greeter.Console
             this.decoratee = decoratee;
         }
 
+        // ---- Start code Section 9.1.1 ----
         public string Greet(string name)
         {
             string greet = this.decoratee.Greet(name);
             return greet + " Nice to meet you.";
         }
+        // ---- End code Section 9.1.1 ----
     }
 }

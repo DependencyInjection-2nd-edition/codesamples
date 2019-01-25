@@ -7,6 +7,8 @@ namespace Ploeh.Samples.Greeter.Tests
 {
     public class TitledGreeterDecoratorTests
     {
+        // Tests missing? Send us a pull request.
+
         [Fact]
         public void InitializeWithNullDecorateeThrows()
         {

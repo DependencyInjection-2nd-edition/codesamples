@@ -8,6 +8,8 @@ namespace Ploeh.Samples.Commerce.Domain.Tests.Unit
 {
     public class ProductServiceTests
     {
+        // Tests missing? Send us a pull request.
+
         [Fact]
         public void CreateWithNullRepositoryWillThrow()
         {

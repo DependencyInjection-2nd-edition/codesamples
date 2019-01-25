@@ -6,6 +6,8 @@ namespace Ploeh.Samples.Commerce.Web.Tests.Unit.Models
 {
     public class ProductViewModelTests
     {
+        // Tests missing? Send us a pull request.
+
         [Fact]
         public void PropertiesWillMatchConstructorArguments()
         {
@@ -15,7 +17,7 @@ namespace Ploeh.Samples.Commerce.Web.Tests.Unit.Models
             var sut = new ProductViewModel(new DiscountedProduct(expected.Name, expected.UnitPrice));
 
             // Act
-            var actual = new { Name = sut.Name, UnitPrice = sut.UnitPrice };
+            var actual = new { sut.Name, sut.UnitPrice };
 
             // Assert
             Assert.Equal(expected, actual);

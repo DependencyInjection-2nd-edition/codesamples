@@ -5,6 +5,8 @@ namespace Ploeh.Samples.Greeter.Tests
 {
     public class FormalGreeterTests
     {
+        // Tests missing? Send us a pull request.
+
         [Fact]
         public void ProducesExpectedGreet()
         {

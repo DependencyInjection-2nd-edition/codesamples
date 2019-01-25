@@ -27,7 +27,7 @@ namespace Ploeh.Samples.Commerce.Web
         public object Create(ControllerContext context) => 
             this.Create(context.ActionDescriptor.ControllerTypeInfo.AsType());
 
-        public void Release(ControllerContext context, object controller) => 
+        public void Release(ControllerContext context, object controller) =>
             (controller as IDisposable)?.Dispose();
 
         public Controller Create(Type type)
@@ -56,8 +56,10 @@ namespace Ploeh.Samples.Commerce.Web
                 default: throw new InvalidOperationException($"Unknown controller {type}.");
             }
         }
-        
+
+        // --- Start code Listing 5.16 ----
         private IProductRepository CreateProductRepository(CommerceContext context) =>
             (IProductRepository)Activator.CreateInstance(this.configuration.ProductRepositoryType, context);
+        // --- End code Listing 5.16 ----
     }
 }

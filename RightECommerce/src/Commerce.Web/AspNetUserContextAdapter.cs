@@ -3,6 +3,7 @@ using Ploeh.Samples.Commerce.Domain;
 
 namespace Ploeh.Samples.Commerce.Web
 {
+    // ---- Code  Listing 3.12 ----
     public class AspNetUserContextAdapter : IUserContext
     {
         private static readonly HttpContextAccessor Accessor = new HttpContextAccessor();

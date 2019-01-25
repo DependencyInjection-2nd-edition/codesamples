@@ -6,6 +6,8 @@ namespace Ploeh.Samples.Commerce.Web.Tests.Unit.Models
 {
     public class FeaturedProductsViewModelTests
     {
+        // Tests missing? Send us a pull request.
+
         [Fact]
         public void ProductsIsNotNull()
         {

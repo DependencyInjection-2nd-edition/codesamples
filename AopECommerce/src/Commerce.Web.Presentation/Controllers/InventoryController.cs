@@ -8,6 +8,7 @@ using Ploeh.Samples.Commerce.Web.Presentation.Models;
 
 namespace Ploeh.Samples.Commerce.Web.Presentation.Controllers
 {
+    // ---- Code Listing 10.14 ----
     public class InventoryController : Controller
     {
         private readonly IProductRepository repository;

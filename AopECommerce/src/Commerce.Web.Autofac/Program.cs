@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Commerce.Web.Autofac
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {

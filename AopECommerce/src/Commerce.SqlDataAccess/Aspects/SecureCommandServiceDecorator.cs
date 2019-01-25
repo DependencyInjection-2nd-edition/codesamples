@@ -5,7 +5,9 @@ using Ploeh.Samples.Commerce.Domain;
 
 namespace Ploeh.Samples.Commerce.SqlDataAccess.Aspects
 {
-    public class SecureCommandServiceDecorator<TCommand> : ICommandService<TCommand>
+    // ---- Code Listing 10.19 ----
+    public class SecureCommandServiceDecorator<TCommand>
+        : ICommandService<TCommand>
     {
         private static readonly Role PermittedRole = GetPermittedRole();
 
@@ -13,7 +15,8 @@ namespace Ploeh.Samples.Commerce.SqlDataAccess.Aspects
         private readonly ICommandService<TCommand> decoratee;
 
         public SecureCommandServiceDecorator(
-            IUserContext userContext, ICommandService<TCommand> decoratee)
+            IUserContext userContext,
+            ICommandService<TCommand> decoratee)
         {
             if (userContext == null) throw new ArgumentNullException(nameof(userContext));
             if (decoratee == null) throw new ArgumentNullException(nameof(decoratee));
@@ -40,7 +43,8 @@ namespace Ploeh.Samples.Commerce.SqlDataAccess.Aspects
 
         private static Role GetPermittedRole()
         {
-            var attribute = typeof(TCommand).GetCustomAttribute<PermittedRoleAttribute>();
+            var attribute = typeof(TCommand)
+                .GetCustomAttribute<PermittedRoleAttribute>();
 
             if (attribute == null)
             {

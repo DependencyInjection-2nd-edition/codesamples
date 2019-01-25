@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Ploeh.Samples.Commerce.Domain.Commands
 {
+    // ---- Code Listing 10.8 ----
     [PermittedRole(Role.InventoryManager)]
     public class AdjustInventory
     {

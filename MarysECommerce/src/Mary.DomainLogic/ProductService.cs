@@ -5,6 +5,7 @@ using Ploeh.Samples.Mary.ECommerce.SqlDataAccess;
 
 namespace Ploeh.Samples.Mary.ECommerce.DomainLogic
 {
+    // ---- Start code Listing 2.3 ----
     public class ProductService : IDisposable
     {
         private readonly CommerceContext dbContext;
@@ -17,12 +18,8 @@ namespace Ploeh.Samples.Mary.ECommerce.DomainLogic
         public IEnumerable<Product> GetFeaturedProducts(
             bool isCustomerPreferred)
         {
-            return GetFeaturedProductsInternal(isCustomerPreferred).ToArray();
-        }
-
-        private IEnumerable<Product> GetFeaturedProductsInternal(bool isCustomerPreferred)
-        {
-            decimal discount = isCustomerPreferred ? .95m : 1;
+            decimal discount =
+                isCustomerPreferred ? .95m : 1;
 
             var featuredProducts =
                 from product in this.dbContext.Products
@@ -30,16 +27,18 @@ namespace Ploeh.Samples.Mary.ECommerce.DomainLogic
                 select product;
 
             return
-                from p in featuredProducts.AsEnumerable()
+                from product in featuredProducts.AsEnumerable()
                 select new Product
                 {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Description = p.Description,
-                    IsFeatured = p.IsFeatured,
-                    UnitPrice = p.UnitPrice * discount
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    IsFeatured = product.IsFeatured,
+                    UnitPrice =
+                        product.UnitPrice * discount
                 };
         }
+        // ---- End code Listing 2.3 ----
 
         public void Dispose()
         {

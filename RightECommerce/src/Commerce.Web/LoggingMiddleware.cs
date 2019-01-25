@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Ploeh.Samples.Commerce.Web
 {
+    // ---- Code Section 7.3.2 ----
     public class LoggingMiddleware
     {
         private readonly ILogger logger;

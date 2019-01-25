@@ -5,21 +5,21 @@ namespace Ploeh.Samples.Commerce.Domain
     public class Product
     {
         public Guid Id { get; set; }
+        public string Description { get; set; }
+
+        // ---- Start code Listing 3.8 ----
         public string Name { get; set; }
         public decimal UnitPrice { get; set; }
-        public string Description { get; set; }
         public bool IsFeatured { get; set; }
 
-        public DiscountedProduct ApplyDiscountFor(IUserContext userContext)
+        public DiscountedProduct ApplyDiscountFor(IUserContext user)
         {
-            decimal discount = CalculateDiscount(userContext);
+            bool preferred = user.IsInRole(Role.PreferredCustomer);
 
-            return new DiscountedProduct(this.Name, this.UnitPrice * discount);
-        }
+            decimal discount = preferred ? .95m : 1.00m;
 
-        private static decimal CalculateDiscount(IUserContext userContext)
-        {
-            return userContext.IsInRole(Role.PreferredCustomer) ? .95m : 1;
+            return new DiscountedProduct(name: this.Name, unitPrice: this.UnitPrice * discount);
         }
+        // ---- End code Listing 3.8 ----
     }
 }

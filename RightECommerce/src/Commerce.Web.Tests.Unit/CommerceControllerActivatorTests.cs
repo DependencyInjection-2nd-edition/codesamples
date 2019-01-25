@@ -13,6 +13,8 @@ namespace Ploeh.Samples.Commerce.Web.Tests.Unit
 {
     public class CommerceControllerActivatorTests
     {
+        // Tests missing? Send us a pull request.
+
         [Fact]
         public void AllControllersCanBeCreated()
         {

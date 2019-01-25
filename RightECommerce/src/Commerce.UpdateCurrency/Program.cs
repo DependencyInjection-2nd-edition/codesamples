@@ -5,16 +5,18 @@ using Ploeh.Samples.Commerce.SqlDataAccess;
 
 namespace Commerce.UpdateCurrency
 {
+    // ---- Start code Listing 7.1 ----
     public static class Program
     {
         public static void Main(string[] args)
         {
-            string connectionString = LoadConnectionString();
+            string connectionString =
+                LoadConnectionString();
 
-            CurrencyParser parser = CreateCurrencyParser(connectionString);
+            CurrencyParser parser =
+                CreateCurrencyParser(connectionString);
 
             ICommand command = parser.Parse(args);
-
             command.Execute();
         }
 
@@ -25,9 +27,12 @@ namespace Commerce.UpdateCurrency
                 .AddJsonFile("appsettings.json", optional: false)
                 .Build();
 
-            return configuration.GetConnectionString("CommerceConnectionString");
+            return configuration.GetConnectionString(
+                "CommerceConnectionString");
         }
+        // ---- End code Listing 7.1 ----
 
+        // ---- Start code Listing 7.2 ----
         private static CurrencyParser CreateCurrencyParser(string connectionString)
         {
             var provider =
@@ -36,5 +41,6 @@ namespace Commerce.UpdateCurrency
 
             return new CurrencyParser(provider);
         }
+        // ---- End code Listing 7.2 ----
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Ploeh.Samples.Mary.ECommerce.SqlDataAccess
 {
+    // ---- Code Listing 2.1 ----
     public class Product
     {
         public Guid Id { get; set; }

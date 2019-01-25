@@ -70,6 +70,7 @@ namespace Ploeh.Samples.Commerce.Web
 
         private static void ConfigureMiddleware(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
+            // ---- Start code Section 7.3.2 ----
             var logger = loggerFactory.CreateLogger("Middleware");
 
             app.Use(async (context, next) =>
@@ -78,6 +79,7 @@ namespace Ploeh.Samples.Commerce.Web
 
                 await middleware.Invoke(context, next);
             });
+            // ---- End code Section 7.3.2 ----
         }
     }
 }

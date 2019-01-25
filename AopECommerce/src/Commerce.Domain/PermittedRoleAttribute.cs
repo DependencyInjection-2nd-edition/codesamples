@@ -2,6 +2,8 @@
 
 namespace Ploeh.Samples.Commerce.Domain
 {
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    // ---- Start code Listing 10.17 ---- 
     public class PermittedRoleAttribute : Attribute
     {
         public readonly Role Role;
@@ -11,4 +13,5 @@ namespace Ploeh.Samples.Commerce.Domain
             this.Role = role;
         }
     }
+    // ---- End code Listing 10.17 ---- 
 }

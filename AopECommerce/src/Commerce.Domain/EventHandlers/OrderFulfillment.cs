@@ -3,6 +3,7 @@ using Ploeh.Samples.Commerce.Domain.Events;
 
 namespace Ploeh.Samples.Commerce.Domain.EventHandlers
 {
+    // ---- Code Listing 6.3 ----
     public class OrderFulfillment : IEventHandler<OrderApproved>
     {
         private readonly ILocationService locationService;

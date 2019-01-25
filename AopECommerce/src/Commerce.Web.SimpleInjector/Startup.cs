@@ -102,19 +102,35 @@ namespace Commerce.Web.SimpleInjector
             container.Register(() => new CommerceContext(this.Configuration.ConnectionString),
                 Lifestyle.Scoped);
 
-            Assembly domainAssembly = typeof(ITimeProvider).Assembly;
+            Assembly assembly = typeof(ITimeProvider).Assembly;
 
-            container.Register(typeof(ICommandService<>), domainAssembly);
+            // ---- Start code Listing 14.11 ----
+            container.Register(
+                typeof(ICommandService<>), assembly);
 
-            container.RegisterDecorator(typeof(ICommandService<>), typeof(AuditingCommandServiceDecorator<>));
+            container.RegisterDecorator(
+                typeof(ICommandService<>),
+                typeof(AuditingCommandServiceDecorator<>));
+
             // NOTE: Ambient transactions disabled as SQLite does not support it. You can turn it on 
             // after switching to SQL Server by uncommenting the next line.
-            // container.RegisterDecorator(typeof(ICommandService<>), typeof(TransactionCommandServiceDecorator<>));
-            container.RegisterDecorator(typeof(ICommandService<>), typeof(SaveChangesCommandServiceDecorator<>));
-            container.RegisterDecorator(typeof(ICommandService<>), typeof(SecureCommandServiceDecorator<>));
+            // container.RegisterDecorator(
+            //     typeof(ICommandService<>),
+            //     typeof(TransactionCommandServiceDecorator<>));
 
-            container.Collection.Register(typeof(IEventHandler<>), domainAssembly);
+            container.RegisterDecorator(
+                typeof(ICommandService<>),
+                typeof(SaveChangesCommandServiceDecorator<>));
+
+            container.RegisterDecorator(
+                typeof(ICommandService<>),
+                typeof(SecureCommandServiceDecorator<>));
+            // ---- End code Listing 14.11 ----
+
+            // ---- Start code Section 14.4.5 ----
+            container.Collection.Register(typeof(IEventHandler<>), assembly);
             container.Register(typeof(IEventHandler<>), typeof(CompositeEventHandler<>));
+            // ---- End code Section 14.4.5 ----
 
             // Register adapters to external systems
             this.RegisterAsImplementedInterfaces(typeof(WcfBillingSystem).Assembly, type => true);
@@ -130,8 +146,12 @@ namespace Commerce.Web.SimpleInjector
         private void RegisterAsImplementedInterfaces(IEnumerable<Type> implementationTypes)
         {
             foreach (Type type in implementationTypes)
+            {
                 foreach (Type service in type.GetInterfaces())
+                {
                     this.container.Register(service, type);
+                }
+            }
         }
     }
 }

@@ -11,6 +11,8 @@ namespace Ploeh.Samples.Commerce.Web.Tests.Unit.Controllers
 {
     public class HomeControllerTests
     {
+        // Tests missing? Send us a pull request.
+
         [Fact]
         public void CreateWithNullProductServiceWillThrow()
         {

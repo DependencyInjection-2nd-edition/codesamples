@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Ploeh.Samples.Commerce.Web.MS.DI
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {

@@ -6,6 +6,9 @@ namespace Ploeh.Samples.HelloDI.Tests
 {
     public class SalutationTests
     {
+        // Tests missing? Send us a pull request.
+
+        // ---- Code Listing 1.4 ----
         [Fact]
         public void ExclaimWillWriteCorrectMessageToMessageWriter()
         {
@@ -18,7 +21,9 @@ namespace Ploeh.Samples.HelloDI.Tests
             sut.Exclaim();
 
             // Assert
-            Assert.Equal(expected: "Hello DI!", actual: writer.WrittenMessage);
+            Assert.Equal(
+                expected: "Hello DI!",
+                actual: writer.WrittenMessage);
         }
     }
 }

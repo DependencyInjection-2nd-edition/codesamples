@@ -3,6 +3,9 @@ using Ploeh.Samples.Commerce.Domain;
 
 namespace Ploeh.Samples.Commerce.SqlDataAccess.Aspects
 {
+    // ---- Code Listing 10.16 ----
+    // In contrast to listing 10.16, this decorator does not call SaveChanges anymore.
+    // This is moved to the SaveChangesCommandServiceDecorator<TCommand>.
     public class AuditingCommandServiceDecorator<TCommand> : ICommandService<TCommand>
     {
         private readonly IUserContext userContext;

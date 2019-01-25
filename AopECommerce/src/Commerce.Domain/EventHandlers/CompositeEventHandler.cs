@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Ploeh.Samples.Commerce.Domain.EventHandlers
 {
+    // ---- Code Listing 6.12 ----
     public class CompositeEventHandler<TEvent> : IEventHandler<TEvent>
     {
         private readonly IEnumerable<IEventHandler<TEvent>> handlers;

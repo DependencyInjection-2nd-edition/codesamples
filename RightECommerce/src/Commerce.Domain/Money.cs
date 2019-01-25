@@ -4,6 +4,7 @@ using System.Diagnostics;
 namespace Ploeh.Samples.Commerce.Domain
 {
     [DebuggerDisplay("{Currency.Code,nq} {Amount}")]
+    // ---- Start code Listing 4.6 ----
     public class Money
     {
         public readonly decimal Amount;
@@ -11,11 +12,12 @@ namespace Ploeh.Samples.Commerce.Domain
 
         public Money(decimal amount, Currency currency)
         {
-            if (currency == null) throw new ArgumentNullException(nameof(currency));
+            if (currency == null) throw new ArgumentNullException("currency");
 
             this.Amount = amount;
             this.Currency = currency;
         }
+        // ---- End code Listing 4.6 ----
 
         public override bool Equals(object obj)
         {

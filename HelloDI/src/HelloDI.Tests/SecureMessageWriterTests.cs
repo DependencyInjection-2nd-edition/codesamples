@@ -8,6 +8,8 @@ namespace Ploeh.Samples.HelloDI.Tests
 {
     public class SecureMessageWriterTests
     {
+        // Tests missing? Send us a pull request.
+
         private static readonly IIdentity AuthenticatedIdentity = new TestIdentity { IsAuthenticated = true };
         private static readonly IIdentity AnonymousIdentity = new TestIdentity { IsAuthenticated = false };
 

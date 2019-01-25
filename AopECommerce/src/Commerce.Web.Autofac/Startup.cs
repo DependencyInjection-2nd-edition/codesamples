@@ -73,6 +73,7 @@ namespace Commerce.Web.Autofac
             builder.RegisterGenericDecorator(
                 typeof(SecureCommandServiceDecorator<>), typeof(ICommandService<>));
 
+            // ---- Start code section 13.4.4 ----
             builder.RegisterAssemblyTypes(domainAssembly)
                 .As(type =>
                     from interfaceType in type.GetInterfaces()
@@ -84,6 +85,7 @@ namespace Commerce.Web.Autofac
                 .WithParameter(
                     (p, c) => true,
                     (p, c) => c.ResolveNamed("handler", p.ParameterType));
+            // ---- End code section 13.4.4 ----
 
             // Register adapters to external systems
             builder.RegisterAssemblyTypes(typeof(WcfBillingSystem).Assembly)

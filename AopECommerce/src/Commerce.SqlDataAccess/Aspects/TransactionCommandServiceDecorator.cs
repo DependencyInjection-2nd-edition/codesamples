@@ -4,11 +4,14 @@ using Ploeh.Samples.Commerce.Domain;
 
 namespace Ploeh.Samples.Commerce.SqlDataAccess.Aspects
 {
-    public class TransactionCommandServiceDecorator<TCommand> : ICommandService<TCommand>
+    // ---- Code Listing 10.15 ----
+    public class TransactionCommandServiceDecorator<TCommand>
+        : ICommandService<TCommand>
     {
         private readonly ICommandService<TCommand> decoratee;
 
-        public TransactionCommandServiceDecorator(ICommandService<TCommand> decoratee)
+        public TransactionCommandServiceDecorator(
+            ICommandService<TCommand> decoratee)
         {
             if (decoratee == null) throw new ArgumentNullException(nameof(decoratee));
 

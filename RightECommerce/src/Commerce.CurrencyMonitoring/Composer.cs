@@ -4,6 +4,7 @@ using Ploeh.Samples.Commerce.SqlDataAccess;
 
 namespace Ploeh.Samples.Commerce.CurrencyMonitoring
 {
+    // ---- Code Listing 8.13 ----
     public class Composer
     {
         private readonly string connectionString;
@@ -17,12 +18,15 @@ namespace Ploeh.Samples.Commerce.CurrencyMonitoring
 
         public CurrencyRateDisplayer CreateRateDisplayer()
         {
-            var context = new CommerceContext(this.connectionString);
+            var context =
+                new CommerceContext(this.connectionString);
 
             return new CurrencyRateDisplayer(
-                new SqlCurrencyRepository(context),
+                new SqlCurrencyRepository(
+                    context),
                 new CurrencyConverter(
-                    new SqlExchangeRateProvider(context)));
+                    new SqlExchangeRateProvider(
+                        context)));
         }
     }
 }

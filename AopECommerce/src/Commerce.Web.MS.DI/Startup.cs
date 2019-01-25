@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Ploeh.Samples.Commerce.Domain;
+using Ploeh.Samples.Commerce.Domain.CommandServices;
 using Ploeh.Samples.Commerce.ExternalConnections;
 using Ploeh.Samples.Commerce.SqlDataAccess;
 using Ploeh.Samples.Commerce.SqlDataAccess.Aspects;
@@ -46,19 +47,21 @@ namespace Ploeh.Samples.Commerce.Web.MS.DI
             services.AddSingleton<IUserContext>(new AspNetUserContextAdapter());
             services.AddScoped(_ => new CommerceContext(this.Configuration.ConnectionString));
 
-            Assembly domainAssembly = typeof(ITimeProvider).Assembly;
+            // ---- Start code Listing 15.7 ----
+            Assembly assembly = typeof(AdjustInventoryService).Assembly;
 
             // Register ICommandService<T> implementations with their decorators
-            var commandServiceMappings =
-                from type in domainAssembly.ExportedTypes
+            var mappings =
+                from type in assembly.GetTypes()
                 where !type.IsAbstract
                 where !type.IsGenericType
                 from i in type.GetInterfaces()
                 where i.IsGenericType
-                where i.GetGenericTypeDefinition() == typeof(ICommandService<>)
+                where i.GetGenericTypeDefinition()
+                    == typeof(ICommandService<>)
                 select new { service = i, implementation = type };
 
-            foreach (var mapping in commandServiceMappings)
+            foreach (var mapping in mappings)
             {
                 Type commandType = mapping.service.GetGenericArguments()[0];
 
@@ -91,21 +94,30 @@ namespace Ploeh.Samples.Commerce.Web.MS.DI
                                     c,
                                     mapping.implementation)))));
             }
+            // ---- End code Listing 15.7 ----
 
             // Register IEventHandler<T> implementations
+            // ---- Start code Listing 15.11 ----
             var handlerTypes =
-                from type in domainAssembly.GetTypes()
+                from type in assembly.GetTypes()
                 where !type.IsAbstract
                 where !type.IsGenericType
                 let serviceTypes = type.GetInterfaces()
                     .Where(i => i.IsGenericType &&
-                        i.GetGenericTypeDefinition() == typeof(IEventHandler<>))
+                        i.GetGenericTypeDefinition()
+                            == typeof(IEventHandler<>))
                 where serviceTypes.Any()
                 select type;
 
-            services.AddSingleton(new CompositeSettings(handlerTypes.ToArray()));
+            services.AddSingleton(new CompositeSettings
+            {
+                AllHandlerTypes = handlerTypes.ToArray()
+            });
 
-            services.AddTransient(typeof(IEventHandler<>), typeof(MsDiCompositeEventHandler<>));
+            services.AddTransient(
+                typeof(IEventHandler<>),
+                typeof(MsDiCompositeEventHandler<>));
+            // ---- End code Listing 15.11 ----
 
             // Register adapters to external systems
             this.RegisterAsImplementedInterfaces(services, typeof(WcfBillingSystem).Assembly, type => true);
@@ -152,16 +164,10 @@ namespace Ploeh.Samples.Commerce.Web.MS.DI
                     services.AddTransient(service, type);
         }
 
+        // ---- Start code Listing 15.10 ----
         public class CompositeSettings
         {
-            public Type[] AllHandlerTypes { get; }
-
-            public CompositeSettings(Type[] allHandlerTypes)
-            {
-                if (allHandlerTypes == null) throw new ArgumentNullException(nameof(allHandlerTypes));
-
-                this.AllHandlerTypes = allHandlerTypes;
-            }
+            public Type[] AllHandlerTypes { get; set; }
         }
 
         public class MsDiCompositeEventHandler<TEvent> : IEventHandler<TEvent>
@@ -170,7 +176,8 @@ namespace Ploeh.Samples.Commerce.Web.MS.DI
             private readonly CompositeSettings settings;
 
             public MsDiCompositeEventHandler(
-                IServiceProvider provider, CompositeSettings settings)
+                IServiceProvider provider,
+                CompositeSettings settings)
             {
                 if (provider == null) throw new ArgumentNullException(nameof(provider));
                 if (settings == null) throw new ArgumentNullException(nameof(settings));
@@ -200,5 +207,6 @@ namespace Ploeh.Samples.Commerce.Web.MS.DI
                             this.provider, type);
             }
         }
+        // ---- End code Listing 15.10 ----
     }
 }

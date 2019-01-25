@@ -7,6 +7,8 @@ namespace Ploeh.Samples.Commerce.Domain.Tests.Unit
 {
     public class CurrencyConverterTests
     {
+        // Tests missing? Send us a pull request.
+
         [Fact]
         public void ExchangeRateGetsConvertedCorrectly()
         {

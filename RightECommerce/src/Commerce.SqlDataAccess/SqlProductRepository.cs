@@ -5,23 +5,19 @@ using Ploeh.Samples.Commerce.Domain;
 
 namespace Ploeh.Samples.Commerce.SqlDataAccess
 {
+    // ---- Code Listing 3.10 ----
     public class SqlProductRepository : IProductRepository
     {
         private readonly CommerceContext context;
 
         public SqlProductRepository(CommerceContext context)
         {
-            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (context == null) throw new ArgumentNullException("context");
 
             this.context = context;
         }
 
         public IEnumerable<Product> GetFeaturedProducts()
-        {
-            return this.GetFeaturedProductsInternal().ToArray();
-        }
-
-        private IEnumerable<Product> GetFeaturedProductsInternal()
         {
             return
                 from product in this.context.Products

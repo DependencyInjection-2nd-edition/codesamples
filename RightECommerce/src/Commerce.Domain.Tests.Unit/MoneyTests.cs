@@ -4,6 +4,8 @@ namespace Ploeh.Samples.Commerce.Domain.Tests.Unit
 {
     public class MoneyTests
     {
+        // Tests missing? Send us a pull request.
+
         public void ValueEquality_InstanceIsConsideredEqualToItself()
         {
             // Arrange

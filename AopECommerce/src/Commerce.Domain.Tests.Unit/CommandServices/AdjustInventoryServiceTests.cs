@@ -16,7 +16,7 @@ namespace Ploeh.Samples.Commerce.Domain.Tests.Unit.CommandServices
         {
             // Act
             Action action = () => new AdjustInventoryService(
-                repository: null, 
+                repository: null,
                 handler: new StubEventHandler<InventoryAdjusted>());
 
             // Assert
@@ -28,7 +28,7 @@ namespace Ploeh.Samples.Commerce.Domain.Tests.Unit.CommandServices
         {
             // Act
             Action action = () => new AdjustInventoryService(
-                repository: new InMemoryInventoryRepository(), 
+                repository: new InMemoryInventoryRepository(),
                 handler: null);
 
             // Assert
@@ -52,7 +52,7 @@ namespace Ploeh.Samples.Commerce.Domain.Tests.Unit.CommandServices
 
             // Assert
             Assert.Equal(
-                expected: expectedEvent, 
+                expected: expectedEvent,
                 actual: new { handler.HandledEvent.ProductId, handler.HandledEvent.QuantityAdjustment });
         }
 

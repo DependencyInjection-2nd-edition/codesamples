@@ -1,5 +1,4 @@
 ﻿using System;
-using Ploeh.Samples.Commerce.Domain;
 
 namespace Ploeh.Samples.Commerce.Domain
 {

@@ -1,9 +1,10 @@
 ﻿namespace Ploeh.Samples.Greeter.Console
 {
-    class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            // ---- Start code Section 9.1.1 ----
             IGreeter greeter =
                 new NiceToMeetYouGreeterDecorator(
                     new TitledGreeterDecorator(
@@ -12,6 +13,7 @@
             string greet = greeter.Greet("Samuel L. Jackson");
 
             System.Console.WriteLine(greet);
+            // ---- End code Section 9.1.1 ----
 
             System.Console.ReadLine();
         }
