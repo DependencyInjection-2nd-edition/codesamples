@@ -1,6 +1,6 @@
 # Sample code for Dependency Injection: Principles, Practices, and Patterns
 
-This repository contains sample code for the book [Dependency Injection: Principles, Practices, and Patterns](https://manning.com/seemann2). You can find the code shown in the book in this repository, embedded in functioning sample applications.
+This repository contains sample code for the book [Dependency Injection Principles, Practices, and Patterns](https://manning.com/seemann2). You can find the code shown in the book in this repository, embedded in functioning sample applications.
 
 ## Required components
 
