@@ -1,6 +1,6 @@
-﻿using System;
-using Ploeh.Samples.HelloDI.Console;
+﻿using Ploeh.Samples.HelloDI.Console;
 using Ploeh.Samples.HelloDI.Tests.Fakes;
+using System;
 using Xunit;
 
 namespace Ploeh.Samples.HelloDI.Tests
@@ -30,7 +30,11 @@ namespace Ploeh.Samples.HelloDI.Tests
         [Fact]
         public void NullWriterInConstructorThrowsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => new Salutation(null));
+            // Arrange
+            Action action = () => new Salutation(writer: null);
+
+            // Assert
+            var exception = Assert.Throws<ArgumentNullException>(action);
             Assert.Equal("Value cannot be null.\r\nParameter name: writer", exception.Message);
         }
     }

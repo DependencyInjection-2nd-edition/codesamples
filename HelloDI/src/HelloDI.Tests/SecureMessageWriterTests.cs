@@ -1,7 +1,7 @@
-﻿using System;
-using System.Security.Principal;
-using Ploeh.Samples.HelloDI.Console;
+﻿using Ploeh.Samples.HelloDI.Console;
 using Ploeh.Samples.HelloDI.Tests.Fakes;
+using System;
+using System.Security.Principal;
 using Xunit;
 
 namespace Ploeh.Samples.HelloDI.Tests
@@ -16,7 +16,8 @@ namespace Ploeh.Samples.HelloDI.Tests
         [Fact]
         public void SutIsMessageWriter()
         {
-            Assert.IsAssignableFrom<IMessageWriter>(CreateSecureMessageWriter());
+            var secureMessageWriter = CreateSecureMessageWriter();
+            Assert.IsAssignableFrom<IMessageWriter>(secureMessageWriter);
         }
 
         [Fact]
@@ -26,7 +27,8 @@ namespace Ploeh.Samples.HelloDI.Tests
             Action action = () => new SecureMessageWriter(writer: null, identity: WindowsIdentity.GetCurrent());
 
             // Arrange
-            Assert.Throws<ArgumentNullException>(action);
+            var exception = Assert.Throws<ArgumentNullException>(action);
+            Assert.Equal("Value cannot be null.\r\nParameter name: writer", exception.Message);
         }
 
         [Fact]
@@ -36,7 +38,8 @@ namespace Ploeh.Samples.HelloDI.Tests
             Action action = () => new SecureMessageWriter(writer: new SpyMessageWriter(), identity: null);
 
             // Arrange
-            Assert.Throws<ArgumentNullException>(action);
+            var exception = Assert.Throws<ArgumentNullException>(action);
+            Assert.Equal("Value cannot be null.\r\nParameter name: identity", exception.Message);
         }
 
         [Fact]
