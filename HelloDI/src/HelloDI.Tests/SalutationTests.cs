@@ -1,5 +1,6 @@
 ﻿using Ploeh.Samples.HelloDI.Console;
 using Ploeh.Samples.HelloDI.Tests.Fakes;
+using System;
 using Xunit;
 
 namespace Ploeh.Samples.HelloDI.Tests
@@ -24,6 +25,17 @@ namespace Ploeh.Samples.HelloDI.Tests
             Assert.Equal(
                 expected: "Hello DI!",
                 actual: writer.WrittenMessage);
+        }
+
+        [Fact]
+        public void NullWriterInConstructorThrowsException()
+        {
+            // Arrange
+            Action action = () => new Salutation(writer: null);
+
+            // Assert
+            var exception = Assert.Throws<ArgumentNullException>(action);
+            Assert.Equal("Value cannot be null.\r\nParameter name: writer", exception.Message);
         }
     }
 }
