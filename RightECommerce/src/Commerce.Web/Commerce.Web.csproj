@@ -25,8 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Commerce.Domain.Services\Commerce.Domain.Services.csproj" />
     <ProjectReference Include="..\Commerce.Domain\Commerce.Domain.csproj" />
     <ProjectReference Include="..\Commerce.SqlDataAccess\Commerce.SqlDataAccess.csproj" />
+    <ProjectReference Include="..\Commerce.Web.Presentation\Commerce.Web.Presentation.csproj" />
   </ItemGroup>
 
 </Project>

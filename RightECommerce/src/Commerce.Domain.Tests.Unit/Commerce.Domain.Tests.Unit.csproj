@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Commerce.Domain.Services\Commerce.Domain.Services.csproj" />
     <ProjectReference Include="..\Commerce.Domain\Commerce.Domain.csproj" />
   </ItemGroup>
 
