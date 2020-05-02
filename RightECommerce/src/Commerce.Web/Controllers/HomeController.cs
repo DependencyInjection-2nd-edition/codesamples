@@ -7,13 +7,17 @@ using Ploeh.Samples.Commerce.Web.Models;
 
 namespace Ploeh.Samples.Commerce.Web.Controllers
 {
+    // ---- Start code Listing 3.4 ----
     public class HomeController : Controller
     {
         private readonly IProductService productService;
 
-        public HomeController(IProductService productService)
+        public HomeController(
+            IProductService productService)
         {
-            if (productService == null) throw new ArgumentNullException(nameof(productService));
+            if (productService == null)
+                throw new ArgumentNullException(
+                    "productService");
 
             this.productService = productService;
         }
@@ -29,6 +33,7 @@ namespace Ploeh.Samples.Commerce.Web.Controllers
 
             return this.View(vm);
         }
+        // ---- End code Listing 3.4 ----
 
         public ViewResult About()
         {

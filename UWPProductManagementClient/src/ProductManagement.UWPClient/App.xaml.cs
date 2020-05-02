@@ -18,7 +18,7 @@ namespace Ploeh.Samples.ProductManagement.UWPClient
     public sealed partial class App : Application, INavigationService
     {
         private readonly INavigationService navigationService;
-        private readonly IProductRepository productRepository;
+        private readonly IProductRepository repository;
 
         /// <summary>
         /// Initializes the singleton application object. This is the first line of authored code
@@ -30,7 +30,7 @@ namespace Ploeh.Samples.ProductManagement.UWPClient
             this.Suspending += this.OnSuspending;
 
             this.navigationService = this;
-            this.productRepository = 
+            this.repository =
                 new CircuitBreakerProductRepositoryDecorator(
                     new CircuitBreaker(TimeSpan.FromMinutes(1)),
                     new FakeProductRepository());
@@ -54,7 +54,9 @@ namespace Ploeh.Samples.ProductManagement.UWPClient
             }
         }
 
-        public void NavigateTo<TViewModel>(Action whenDone = null, object model = null) 
+        // ---- Start code Listing 7.6 ----
+        public void NavigateTo<TViewModel>(
+            Action whenDone = null, object model = null)
             where TViewModel : IViewModel
         {
             Page page = this.CreatePage(typeof(TViewModel));
@@ -72,26 +74,24 @@ namespace Ploeh.Samples.ProductManagement.UWPClient
             {
                 return new MainPage(
                     new MainViewModel(
-                        this.navigationService,
-                        this.productRepository));
+                        this.navigationService, this.repository));
             }
             else if (viewModelType == typeof(EditProductViewModel))
             {
                 return new EditProductPage(
-                    new EditProductViewModel(
-                        this.productRepository));
+                    new EditProductViewModel(this.repository));
             }
             else if (viewModelType == typeof(NewProductViewModel))
             {
                 return new NewProductPage(
-                    new NewProductViewModel(
-                        this.productRepository));
+                    new NewProductViewModel(this.repository));
             }
             else
             {
-                throw new InvalidOperationException($"Unknown view model: {viewModelType}.");
+                throw new Exception($"Unknown view model: {viewModelType}.");
             }
         }
+        // ---- End code Listing 7.6 ----
 
         /// <summary>Invoked when Navigation to a certain page fails</summary>
         /// <param name="sender">The Frame which failed navigation</param>
