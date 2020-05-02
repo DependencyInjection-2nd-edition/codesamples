@@ -11,7 +11,7 @@ namespace Ploeh.Samples.ProductManagement.UWPClient.CrossCuttingConcerns
         {
             this.timeout = timeout;
         }
-        
+
         public ICircuitState NextState() =>
             this.tripped
                 ? new OpenCircuitState(this.timeout)
