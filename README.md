@@ -4,7 +4,7 @@ This repository contains sample code for the book [Dependency Injection Principl
 
 ## Required components
 
-All solutions are built using Visual Studio 2017 on .NET Core, although you should be able to use the solutions with Visual Studio Code on Mac and Linux as well.
+All solutions are built using Visual Studio 2017 on .NET Core, although you should be able to use the solutions with Visual Studio 2019 and Visual Studio Code on Mac and Linux as well.
 
 Some of the solutions themselves use various open source DI Containers to compile and run:
 - Autofac: https://autofac.org
@@ -21,7 +21,7 @@ After setting up the database, you need to add the connection string to the `app
 
 ## Contributions
 
-All code is is released as open source, and we do take pull requests. We've left blank some implementation code not central to the topic of dependency injection, or at least in a state that could be improved.
+All code is released as open source, and we do take pull requests. We've left blank some implementation code not central to the topic of dependency injection, or at least in a state that could be improved.
 
 There's also fewer unit tests than we'd like.
 
@@ -33,4 +33,4 @@ While an open source code base is a dynamic entity, the printed book can't be ch
 
 For the rest of the code base, we take pull requests, but please follow [these tips for good pull requests](https://blog.ploeh.dk/2015/01/15/10-tips-for-better-pull-requests).
 
-(Last updated 2019.01.25 to update the book's title)
+(Last updated 2020.05.02 to note that the code samples can be run using Visual Studio 2019)
