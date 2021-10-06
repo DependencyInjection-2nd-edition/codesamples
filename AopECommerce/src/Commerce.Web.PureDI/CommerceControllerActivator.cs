@@ -1,4 +1,4 @@
-﻿         using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +16,7 @@ using Ploeh.Samples.Commerce.Web.Presentation.Controllers;
 
 namespace Ploeh.Samples.Commerce.Web.PureDI
 {
-    public class CommerceControllerActivator : IControllerActivator, IDisposable
+    public sealed class CommerceControllerActivator : IControllerActivator, IDisposable
     {
         private readonly CommerceConfiguration configuration;
 
@@ -35,7 +35,7 @@ namespace Ploeh.Samples.Commerce.Web.PureDI
             this.timeProvider = new DefaultTimeProvider();
         }
 
-        void IDisposable.Dispose()
+        public void Dispose()
         {
             // Release Singletons
             this.timeProvider.Dispose();
@@ -118,8 +118,7 @@ namespace Ploeh.Samples.Commerce.Web.PureDI
                             this.userContext,
                             this.timeProvider,
                             context,
-                            decoratee))
-                    );
+                            decoratee)));
         }
 
         private IEventHandler<TEvent> Handler<TEvent>(CommerceContext context)
@@ -141,7 +140,7 @@ namespace Ploeh.Samples.Commerce.Web.PureDI
                 new WcfInventoryManagement());
 
             yield return new RefundSender(
-                new SqlOrderRepository(context), 
+                new SqlOrderRepository(context),
                 new WcfBillingSystem());
 
             yield return new TermsAndConditionsSender(

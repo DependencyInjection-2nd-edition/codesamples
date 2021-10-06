@@ -10,8 +10,6 @@ namespace Ploeh.Samples.Commerce.Domain.EventHandlers
 
         public CompositeEventHandler(IEnumerable<IEventHandler<TEvent>> handlers)
         {
-            if (handlers == null) throw new ArgumentNullException(nameof(handlers));
-
             this.handlers = handlers;
         }
 

@@ -7,7 +7,9 @@ using Ploeh.Samples.ProductManagement.PresentationLogic.UICommands;
 
 namespace Ploeh.Samples.ProductManagement.PresentationLogic.ViewModels
 {
-    public class MainViewModel : IViewModel, INotifyPropertyChanged
+    // ---- Code Listing 7.4 ----
+    public class MainViewModel : IViewModel,
+        INotifyPropertyChanged
     {
         private readonly INavigationService navigator;
         private readonly IProductRepository productRepository;
@@ -16,41 +18,41 @@ namespace Ploeh.Samples.ProductManagement.PresentationLogic.ViewModels
             INavigationService navigator,
             IProductRepository productRepository)
         {
-            if (navigator == null) throw new ArgumentNullException("navigator");
-            if (productRepository == null) throw new ArgumentNullException("productRepository");
-
             this.navigator = navigator;
             this.productRepository = productRepository;
 
-            this.AddProductCommand = new RelayCommand(this.AddProduct);
-            this.EditProductCommand = new RelayCommand(this.EditProduct);
+            this.AddProductCommand =
+                new RelayCommand(this.AddProduct);
+            this.EditProductCommand =
+                new RelayCommand(this.EditProduct);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged = (s, e) => { };
-        public IEnumerable<Product> Model { get; private set; }
-
+        public IEnumerable<Product> Model { get; set; }
         public ICommand AddProductCommand { get; }
         public ICommand EditProductCommand { get; }
 
-        public void Initialize(Action whenDone, object model)
-        {
-            this.LoadProducts();
-        }
+        public event PropertyChangedEventHandler
+            PropertyChanged = (s, e) => { };
 
-        private void LoadProducts()
+        public void Initialize(
+            Action whenDone, object model)
         {
             this.Model = this.productRepository.GetAll();
-            this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs("Model"));
+            this.PropertyChanged.Invoke(this,
+                new PropertyChangedEventArgs("Model"));
         }
 
         private void AddProduct()
         {
-            this.navigator.NavigateTo<NewProductViewModel>(whenDone: this.GoBack);
+            this.navigator.NavigateTo<NewProductViewModel>(
+                whenDone: this.GoBack);
         }
 
         private void EditProduct(object product)
         {
-            this.navigator.NavigateTo<EditProductViewModel>(whenDone: this.GoBack, model: product);
+            this.navigator.NavigateTo<EditProductViewModel>(
+                whenDone: this.GoBack,
+                model: product);
         }
 
         private void GoBack()

@@ -4,17 +4,21 @@ using Ploeh.Samples.ProductManagement.Domain;
 
 namespace Ploeh.Samples.ProductManagement.UWPClient.CrossCuttingConcerns
 {
-    public class CircuitBreakerProductRepositoryDecorator : IProductRepository
+    // ---- Start code Listing 9.4 ----
+    public class CircuitBreakerProductRepositoryDecorator
+        : IProductRepository
     {
         private readonly ICircuitBreaker breaker;
         private readonly IProductRepository decoratee;
 
         public CircuitBreakerProductRepositoryDecorator(
-            ICircuitBreaker breaker, IProductRepository decoratee)
+            ICircuitBreaker breaker,
+            IProductRepository decoratee)
         {
             this.breaker = breaker;
             this.decoratee = decoratee;
         }
+        // ---- End code Listing 9.4 ----
 
         public void Delete(Guid id) => this.breaker.Execute(() => this.decoratee.Delete(id));
         public IEnumerable<Product> GetAll() => this.breaker.Execute(() => this.decoratee.GetAll());
