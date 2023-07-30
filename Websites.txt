@@ -1,0 +1,24 @@
+Main Page
+https://www.manning.com/books/dependency-injection-principles-practices-patterns
+
+Discussion Forum
+https://livebook.manning.com/book/dependency-injection-principles-practices-patterns/discussion
+https://livebook.manning.com/book/dependency-injection-principles-practices-patterns/about-this-book/33
+
+Code of Conduct in discussion forum
+https://livebook.manning.com/#!/discussion.
+
+Github Repo
+https://github.com/DependencyInjection-2nd-edition/codesamples
+
+AUTOFAC
+autofac.org
+
+simpleinjector.org
+
+Microsoft.Extensions.DependencyInjection
+http://github.com/aspnet/dependencyinjection
+
+SQLite
+
+sidenote: If I want to us a legit SQL Server instead of SQLite I need to change 'applicationsettings.json file of my applications and change "CommerceContext" to user SQLServer.
