@@ -2,8 +2,8 @@
 
 namespace ElectricalAppliances.Console
 {
-    // UK to USA Adapter 
-    public class TypeAToGAdapter : ITypeAPluggableAppliance
+    // UK (Type G) to USA (Type A) Adapter 
+    public class TypeGToAAdapter : ITypeAPluggableAppliance
     {
         private readonly ITypeGPluggableAppliance appliance;
 
